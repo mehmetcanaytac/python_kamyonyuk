@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Ana Sayfa - Filo Yönetim Sistemi{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Filolarınızın Yönetimi Artık Çok Daha Kolay</h1>
+                <p class="lead mb-4">Filo Yönetim Sistemi ile tüm araçlarınızı tek bir yerden yönetin, maliyetlerinizi düşürün ve verimliliğinizi artırın.</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="btn btn-primary btn-lg">Ücretsiz Dene</a>
+                    <a href="#features" class="btn btn-outline-primary btn-lg">Daha Fazla Bilgi</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://via.placeholder.com/600x400" alt="Filo Yönetim Ekran Görüntüsü" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Neden Bizi Tercih Etmelisiniz?</h2>
+            <p class="text-muted">İşletmeniz için en iyi çözümü sunuyoruz</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Gerçek Zamanlı Takip</h3>
+                    <p class="text-muted">Araçlarınızın anlık konumunu ve durumunu takip edin.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Detaylı Raporlama</h3>
+                    <p class="text-muted">Kapsamlı raporlarla filo performansınızı analiz edin.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Kolay Yönetim</h3>
+                    <p class="text-muted">Kullanıcı dostu arayüzü ile filonuzu kolayca yönetin.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">Hemen Başlayın</h2>
+        <p class="lead mb-4">Filo yönetiminde yeni bir dönem başlatın</p>
+        <a href="#" class="btn btn-primary btn-lg">Ücretsiz Demo Talep Et</a>
+    </div>
+</section>
+{% endblock %}

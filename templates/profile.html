@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Profil - Filo Yönetim Sistemi{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Profil Bilgileri</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <form id="profileForm">
+                <div class="mb-3">
+                    <label for="companyName" class="form-label">Firma Adı</label>
+                    <input type="text" class="form-control" id="companyName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Ad Soyad</label>
+                    <input type="text" class="form-control" id="fullName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">Telefon Numarası</label>
+                    <input type="tel" class="form-control" id="phoneNumber" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-4" id="profileInfo" style="display: none;">
+        <div class="card-header">
+            <h5 class="mb-0">Kayıtlı Bilgileriniz</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Firma Adı:</strong> <span id="savedCompanyName"></span></p>
+            <p><strong>Ad Soyad:</strong> <span id="savedFullName"></span></p>
+            <p><strong>Telefon:</strong> <span id="savedPhoneNumber"></span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('profileForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const profileData = {
+        companyName: document.getElementById('companyName').value,
+        fullName: document.getElementById('fullName').value,
+        phoneNumber: document.getElementById('phoneNumber').value
+    };
+
+    // Save to localStorage for demo purposes
+    localStorage.setItem('profileData', JSON.stringify(profileData));
+    
+    // Update the display
+    updateProfileDisplay(profileData);
+    
+    // Show success message
+    alert('Profil bilgileriniz başarıyla kaydedildi!');
+});
+
+function updateProfileDisplay(profileData) {
+    document.getElementById('savedCompanyName').textContent = profileData.companyName;
+    document.getElementById('savedFullName').textContent = profileData.fullName;
+    document.getElementById('savedPhoneNumber').textContent = profileData.phoneNumber;
+    document.getElementById('profileInfo').style.display = 'block';
+}
+
+// Load saved data on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedData = localStorage.getItem('profileData');
+    if (savedData) {
+        const profileData = JSON.parse(savedData);
+        // Fill the form
+        document.getElementById('companyName').value = profileData.companyName;
+        document.getElementById('fullName').value = profileData.fullName;
+        document.getElementById('phoneNumber').value = profileData.phoneNumber;
+        // Update display
+        updateProfileDisplay(profileData);
+    }
+});
+</script>
+{% endblock %}

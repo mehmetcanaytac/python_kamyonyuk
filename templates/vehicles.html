@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Araçlar - Filo Yönetim Sistemi{% endblock %}
+
+{% block content %}
+<!-- Vehicles Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0">Araç Listesi</h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicleModal">
+                <i class="fas fa-plus me-2"></i>Yeni Araç Ekle
+            </button>
+        </div>
+        
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Plaka</th>
+                                <th>Şoför</th>
+                                <th>Durum</th>
+                                <th>Son Bakım</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vehicle in vehicles %}
+                            <tr>
+                                <td>{{ vehicle.plate }}</td>
+                                <td>{{ vehicle.driver }}</td>
+                                <td>
+                                    <span class="badge bg-{{ 'success' if vehicle.status == 'Aktif' else 'warning' }}">
+                                        {{ vehicle.status }}
+                                    </span>
+                                </td>
+                                <td>{{ vehicle.last_maintenance.strftime('%d.%m.%Y') if vehicle.last_maintenance else 'Belirtilmemiş' }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-2" title="Düzenle">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" title="Sil">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Henüz kayıtlı araç bulunmamaktadır.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add Vehicle Modal -->
+<div class="modal fade" id="addVehicleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni Araç Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <form action="{{ url_for('vehicles') }}" method="POST">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="plate" class="form-label">Plaka</label>
+                        <input type="text" class="form-control" id="plate" name="plate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="driver" class="form-label">Şoför Adı</label>
+                        <input type="text" class="form-control" id="driver" name="driver" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Durum</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="Aktif" selected>Aktif</option>
+                            <option value="Bakımda">Bakımda</option>
+                            <option value="Ariza">Arıza</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_maintenance" class="form-label">Son Bakım Tarihi</label>
+                        <input type="date" class="form-control" id="last_maintenance" name="last_maintenance">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Modal kapatıldığında formu temizle
+    document.getElementById('addVehicleModal').addEventListener('hidden.bs.modal', function () {
+        this.querySelector('form').reset();
+    });
+</script>
+{% endblock %}
