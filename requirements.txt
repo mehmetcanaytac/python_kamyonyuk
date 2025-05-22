@@ -1,6 +1,8 @@
 PyQt5==5.15.9
-sqlite3
 bcrypt==4.0.1
 Flask==2.3.3
 Flask-SQLAlchemy==3.0.5
 python-dotenv==1.0.0
+gunicorn==21.2.0
+geopy==2.3.0
+folium==0.14.0
